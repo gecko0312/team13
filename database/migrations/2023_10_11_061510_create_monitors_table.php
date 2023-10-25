@@ -19,6 +19,7 @@ class CreateMonitorsTable extends Migration
             $table->string('panel',100);
             $table->string('resolution',100);
             $table->timestamps();
+            // 測試
         });
     }
 
