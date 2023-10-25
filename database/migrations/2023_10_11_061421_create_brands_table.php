@@ -14,9 +14,10 @@ class CreateBrandsTable extends Migration
     public function up()
     {
         Schema::create('brands', function (Blueprint $table) {
-            $table->id();
-            $table->string('bname',100);
-            $table->string('location',100);
+            $table->id()->comment('編號(主鍵)');
+            $table->string('bname',100)->comment('名稱');
+            $table->string('location',100)->comment('地區');
+            $table->year('brand_time')->comment('成立時間')->unsigned()->nullable();
             $table->timestamps();
         });
     }
