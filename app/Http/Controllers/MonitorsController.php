@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Monitor;
 
 class MonitorsController extends Controller
 {
@@ -14,6 +15,7 @@ class MonitorsController extends Controller
     public function index()
     {
         //
+        return Monitor::all()->toArray();
     }
 
     /**

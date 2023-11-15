@@ -46,7 +46,7 @@ class BrandsTableSeeder extends Seeder
 
     public function run()
     {
-        for ($i=0;$i<10;$i++){
+        for ($i=0;$i<30;$i++){
             $bname=$this->RandombrandsName();
             $location=$this->RandombrandsLocation();
             $year=Carbon::now()->year;
