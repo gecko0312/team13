@@ -11,6 +11,7 @@ class Brand extends Model
     protected $fillable = [
         'bname',
         'location',
+        'brand_time'
         
     ];
 }

@@ -12,8 +12,12 @@ class Monitor extends Model
         'product_model',
         'bid',
         'size',
+        'nits',        
         'hz',
-        'resolution'
+        'panel',
+        'speaker',
+        'resolution',
+        'price'
         
     ];
 }
