@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\MonitorsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,7 +14,14 @@ use App\Http\Controllers\MonitorsController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/',function(){
+//     return view('welcome');
+// });
 
-Route::get('monitor',[MonitorsController::class,'index'])->name('monitor.index');
-Route::get('brand',[BrandsController::class,'index'])->name('brand.index');
+Route::get('/',function(){
+    return redirect('monitors'); 
+});
+
+Route::get('monitors',[MonitorsController::class,'index'])->name('monitors.index');
+Route::get('brands',[BrandsController::class,'index'])->name('brands.index');
 
