@@ -14,8 +14,8 @@ class MonitorsController extends Controller
      */
     public function index()
     {
-        //
-        return Monitor::all()->toArray();
+        $m=Monitor::all()->toArray();
+        return view('monitors.index')->with('monitors',$m);
     }
 
     /**
