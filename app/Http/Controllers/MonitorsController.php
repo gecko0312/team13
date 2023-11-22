@@ -14,8 +14,10 @@ class MonitorsController extends Controller
      */
     public function index()
     {
-        //
-        return Monitor::all()->toArray();
+            //從Model拿資料
+            $monitors = Monitor::all()->toArray();
+            //把資料送給view
+            return view("monitors.index")->with('monitors',$monitors);
     }
 
     /**
