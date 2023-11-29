@@ -50,6 +50,7 @@ class MonitorsController extends Controller
     public function show($id)
     {
         //
+        return Monitor::findOrfail($id)->toArray();
     }
 
     /**
@@ -61,6 +62,7 @@ class MonitorsController extends Controller
     public function edit($id)
     {
         //
+        return Monitor::findOrfail($id)->toArray();
     }
 
     /**

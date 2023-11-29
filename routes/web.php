@@ -21,7 +21,17 @@ use App\Http\Controllers\MonitorsController;
 Route::get('/',function(){
     return redirect('monitors'); 
 });
-
+//顯示所有螢幕表格
 Route::get('monitors',[MonitorsController::class,'index'])->name('monitors.index');
+//顯示單一螢幕表格
+Route::get('monitors/{id}',[MonitorsController::class,'show'])->where('id','[0-9]+')->name('monitors.show');
+//修改單一螢幕資料
+Route::get('monitors/{id}/edit',[MonitorsController::class,'edit'])->where('id','[0-9]+')->name('monitors.edit');
+
+//顯示所有廠牌表格
 Route::get('brands',[BrandsController::class,'index'])->name('brands.index');
+//顯示單一廠牌表格
+Route::get('brands/{id}',[BrandsController::class,'show'])->where('id','[0-9]+')->name('brands.show');
+//修改單一廠牌表格
+Route::get('brands/{id}/edit',[BrandsController::class,'edit'])->where('id','[0-9]+')->name('brands.edit');
 
