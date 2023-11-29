@@ -1,8 +1,9 @@
-<html>
-    <head>
 
-    </head>
-    <body>
+@extends('app')
+
+@section('title','電腦螢幕查詢網站 - 顯示所有廠牌資訊')
+
+@section('monitor_contents')
         <h1>顯示所有廠牌資訊</h1>
         <table>
             <tr>
@@ -23,10 +24,8 @@
                     <td><a href="{{ route('brands.show',['id'=>$brands[$i]['id']]) }}">顯示</a></td>
                     <td><a href="{{ route('brands.edit',['id'=>$brands[$i]['id']]) }}">修改</a></td>
                     <td>刪除</td>
-
                 </tr>
             @endfor
         </table>
-
-    </body>
-</html>
+@endsection
+    
