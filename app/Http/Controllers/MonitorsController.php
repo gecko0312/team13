@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Monitor;
-
 class MonitorsController extends Controller
 {
     /**
@@ -14,12 +11,10 @@ class MonitorsController extends Controller
      */
     public function index()
     {
-            //從Model拿資料
-            $monitors = Monitor::all()->toArray();
-            //把資料送給view
-            return view("monitors.index")->with('monitors',$monitors);
+        //
+        $monitors= Monitor::all()->toArray();
+        return view('monitors.index')->with('monitors',$monitors);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -29,7 +24,6 @@ class MonitorsController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -40,7 +34,6 @@ class MonitorsController extends Controller
     {
         //
     }
-
     /**
      * Display the specified resource.
      *
@@ -50,6 +43,7 @@ class MonitorsController extends Controller
     public function show($id)
     {
         //
+        return Monitor::findOrfail($id)->toArray();
     }
 
     /**
@@ -61,6 +55,7 @@ class MonitorsController extends Controller
     public function edit($id)
     {
         //
+        return Monitor::findOrfail($id)->toArray();
     }
 
     /**
@@ -74,7 +69,6 @@ class MonitorsController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *
