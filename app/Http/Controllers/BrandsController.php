@@ -48,7 +48,7 @@ class BrandsController extends Controller
      */
     public function show($id)
     {
-        //
+        return Brand::findOrfail($id)->toArray();
     }
 
     /**
@@ -59,7 +59,8 @@ class BrandsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return Brand::findOrfail($id)->toArray();
+
     }
 
     /**
