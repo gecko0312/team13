@@ -1,13 +1,10 @@
-<html>
+@extends('app')
 
-    <head>
-        <title>列出所有品牌</title>
-    </head>
+@section('title','電腦螢幕查詢網站 - 顯示所有廠牌資訊')
 
-        <body>
-            <h1>顯示所有品牌資訊</h1>
-
-            <table>
+@section('monitor_contents')
+        <h1>顯示所有廠牌資訊</h1>
+        <table>
             <tr>
                 <th>編號</th>
                 <th>名稱</th>
@@ -30,6 +27,4 @@
                 </tr>
             @endfor
         </table>
-        </body>
-
-</html>
+@endsection
