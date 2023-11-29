@@ -1,8 +1,8 @@
-<html>
-    <head>
+@extends('app')
 
-    </head>
-    <body>
+@section('title','電腦螢幕查詢網站 - 顯示所有電腦螢幕資訊')
+
+@section('monitor_contents')
         <h1>顯示所有電腦螢幕資訊</h1>
         <table>
             <tr>
@@ -38,11 +38,4 @@
                 </tr>
             @endfor
         </table>
-        
-    </body>
-</html>
-
-
-
-
-
+@endsection
