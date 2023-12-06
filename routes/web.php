@@ -23,5 +23,11 @@ Route::get('/',function(){
 });
 
 Route::get('monitors',[MonitorsController::class,'index'])->name('monitors.index');
+Route::get('monitors/{id}',[MonitorsController::class,'show'])->where('id','[0-9]+')->name('monitors.show');
+Route::get('monitors/{id}/edit',[MonitorsController::class,'edit'])->where('id','[0-9]+')->name('monitors.edit');
+Route::get('brands',[BrandsController::class,'index'])->name('brands.index');
+Route::get('brands/{id}',[BrandsController::class,'show'])->where('id','[0-9]+')->name('brands.show');
+Route::get('brands/{id}/edit',[BrandsController::class,'edit'])->where('id','[0-9]+')->name('brands.edit');
+Route::get('monitors',[MonitorsController::class,'index'])->name('monitors.index');
 Route::get('brands',[BrandsController::class,'index'])->name('brands.index');
 

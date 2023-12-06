@@ -15,7 +15,7 @@ class MonitorsController extends Controller
     public function index()
     {
         //
-        $monitors= Monitor::all()->toArray();
+        $monitors= Monitor::all();
         return view('monitors.index')->with('monitors',$monitors);
     }
 
@@ -48,7 +48,8 @@ class MonitorsController extends Controller
      */
     public function show($id)
     {
-        //
+        $monitor= Monitor::findOrfail($id);
+        return view('monitors.show')->with('monitor',$monitor); 
     }
 
     /**
