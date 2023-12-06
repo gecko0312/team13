@@ -19,4 +19,9 @@ class Brand extends Model
     {
         return $this->hasMany('App\Models\Monitor','bid');
     }
+    public function delete()
+    {
+        $this->monitors()->delete();
+        return parent::delete();
+    }
 }
