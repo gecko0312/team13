@@ -83,6 +83,8 @@ class BrandsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $brand= Brand::findOrfail($id);
+        $brand->delete();
+        return redirect('brands');
     }
 }

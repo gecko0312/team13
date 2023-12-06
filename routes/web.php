@@ -30,4 +30,6 @@ Route::get('brands/{id}',[BrandsController::class,'show'])->where('id','[0-9]+')
 Route::get('brands/{id}/edit',[BrandsController::class,'edit'])->where('id','[0-9]+')->name('brands.edit');
 Route::get('monitors',[MonitorsController::class,'index'])->name('monitors.index');
 Route::get('brands',[BrandsController::class,'index'])->name('brands.index');
+Route::delete('monitors/delete/{id}',[MonitorsController::class,'destroy'])->where('id','[0-9]+')->name('monitors.destroy');
+Route::delete('brands/delete/{id}',[BrandsController::class,'destroy'])->where('id','[0-9]+')->name('brands.destroy');
 
