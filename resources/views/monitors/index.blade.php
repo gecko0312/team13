@@ -25,7 +25,7 @@
                 <tr>
                     <td>{{ $monitor->id }}</td>
                     <td>{{ $monitor->product_model }}</td>
-                    <td>{{ $monitor->bid }}</td>
+                    <td>{{ $monitor->bname }}</td>
                     <td>{{ $monitor->size }}</td>
                     <td>{{ $monitor->nits }}</td>
                     <td>{{ $monitor->hz }}</td>
@@ -35,7 +35,13 @@
                     <td>{{ $monitor->price }}</td>
                     <td><a href="{{ route('monitors.edit',['id'=>$monitor->id]) }}">編輯</a></td>
                     <td><a href="{{ route('monitors.show',['id'=>$monitor->id]) }}">顯示</a></td>
-                    <td>刪除</td> 
+                    <td>
+                        <form action="{{ url('monitors/delete',['id'=> $monitor->id]) }}"  mehod="post">
+                            <input class="btn btn-default" type="submit" value="刪除" />
+                            @mehod('delete')
+                            @csrf
+                        </from>
+                    </td> 
                 </tr>
             @endforeach
         </table>

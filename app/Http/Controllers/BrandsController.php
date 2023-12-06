@@ -50,7 +50,9 @@ class BrandsController extends Controller
     public function show($id)
     {
         $brand=Brand::findOrfail($id);
-        return view('brands.show')->with('brand',$brand);
+        
+        $monitors=$brand->monitors;
+        return view('brands.show',['brand'=>$brand,'monitors'=>$monitors]);
     }
 
     /**
