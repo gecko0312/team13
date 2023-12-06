@@ -20,4 +20,9 @@ class Monitor extends Model
         'price'
         
     ];
+    public function brands()
+    {
+        return $this->belongsTo('App\Models\Brand','bid','id');
+    }
+
 }
