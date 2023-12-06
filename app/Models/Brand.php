@@ -14,4 +14,9 @@ class Brand extends Model
         'brand_time'
         
     ];
+
+    public function monitors()
+    {
+        return $this->hasMany('App\Models\Monitor','bid');
+    }
 }

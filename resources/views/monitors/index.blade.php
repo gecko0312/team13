@@ -24,7 +24,7 @@
                 <tr>
                     <td >{{ $monitor->id }}</td>
                     <td>{{ $monitor->product_model }}</td>
-                    <td>{{ $monitor->bid }}</td>
+                    <td>{{ $monitor->brand->bname }}</td>
                     <td>{{ $monitor->size }}</td>
                     <td>{{ $monitor->nits }}</td>
                     <td>{{ $monitor->hz }}</td>

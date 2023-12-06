@@ -5,7 +5,7 @@
 @section('monitor_contents')
 編號：{{ $monitor->id }}<br/>
 產品型號：{{ $monitor->product_model }}<br/>
-廠牌：{{ $monitor->bid }}<br/>
+廠牌：{{ $monitor->brand->bname }}<br/>
 尺寸：{{ $monitor->size }}<br/>
 亮度：{{ $monitor->nits }}<br/>
 更新率：{{ $monitor->hz }}<br/>

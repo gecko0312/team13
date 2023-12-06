@@ -48,12 +48,10 @@ class BrandsController extends Controller
      */
     public function show($id)
     {
-        // 從 Model 拿資料
-        $brand = brand::findOrFail($id);
-        // 把資料送給 view
-        return view('brands.show')->with('brand', $brand);
+        $brand=Brand::findOrfail($id);
+        $monitors=$brand->monitors;
+        return view('brands.show',['brand'=>$brand,'monitors'=>$monitors]);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
