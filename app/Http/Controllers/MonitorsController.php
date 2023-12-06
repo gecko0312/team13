@@ -83,6 +83,8 @@ class MonitorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $monitor=Monitor::findOrfail($id);
+        $monitor->delete();
+        return redirect('monitors');
     }
 }
