@@ -4,7 +4,7 @@
 </div>
 <div class="form-group">
     {!! Form::label('bid', '廠牌：') !!}
-    <!-- 待設計一下拉式選單 -->
+    {!! Form::select('bid',$brands,$brandSelected,['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
     {!! Form::label('size', '尺寸：') !!}

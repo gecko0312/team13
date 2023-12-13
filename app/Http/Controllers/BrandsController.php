@@ -37,7 +37,17 @@ class BrandsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bname=$request->input('bname');
+        $location=$request->input('location');
+        $brand_time=$request->input('brand_time');
+
+        $brand=Brand::create([
+            'bname'=>$bname,
+            'location'=>$location,
+            'brand_time'=>$brand_time,
+        ]);
+
+        return redirect('brands');
     }
 
     /**
@@ -75,7 +85,14 @@ class BrandsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $brand=Brand::findOrfail($id);
+
+        $brand->bname=$request->input('bname');
+        $brand->location=$request->input('location');
+        $brand->brand_time=$request->input('brand_time');
+        $brand->save();
+
+        return redirect('brands');
     }
 
     /**
