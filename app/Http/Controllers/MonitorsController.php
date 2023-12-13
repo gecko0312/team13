@@ -14,9 +14,8 @@ class MonitorsController extends Controller
      */
     public function index()
     {
-        // 從Model拿資料
-        $monitors=Monitor::all();
-        // 把資料送給view
+        //
+        $monitors= Monitor::all();
         return view('monitors.index')->with('monitors',$monitors);
     }
 
@@ -28,6 +27,7 @@ class MonitorsController extends Controller
     public function create()
     {
         //
+        return view('monitors.create');
     }
 
     /**
@@ -49,11 +49,8 @@ class MonitorsController extends Controller
      */
     public function show($id)
     {
-        // 從 Model 拿資料
-        $monitor = monitor::findOrFail($id);
-        // 把資料送給 view
-        return view('monitors.show')->with('monitor', $monitor);
-        
+        $monitor= Monitor::findOrfail($id);
+        return view('monitors.show')->with('monitor',$monitor);
     }
 
     /**
@@ -64,8 +61,8 @@ class MonitorsController extends Controller
      */
     public function edit($id)
     {
-        //
-        return Monitor::findOrfail($id)->toArray();
+         $monitor= Monitor::findOrfail($id);
+        return view('monitors.edit',['monitor'=>$monitor]);
     }
 
     /**
@@ -88,10 +85,8 @@ class MonitorsController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $monitor = Monitor::findOrFail($id);
+        $monitor=Monitor::findOrfail($id);
         $monitor->delete();
         return redirect('monitors');
-
     }
 }

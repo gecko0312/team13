@@ -3,7 +3,13 @@
 @section('title','電腦螢幕查詢網站 - 顯示所有電腦螢幕資訊')
 
 @section('monitor_contents')
+
         <h1>顯示所有電腦螢幕資訊</h1>
+        
+        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+        <a href="{{ route('monitors.create') }}"> 新增螢幕資料</a>
+        </div>
+        
         <table width=100% class="monitor_table">
             <tr>
                 <th>編號</th>
@@ -35,12 +41,13 @@
                     <td><a href="{{ route('monitors.show',['id'=>$monitor->id ]) }}">顯示</a></td>
                     <td><a href="{{ route('monitors.edit',['id'=>$monitor->id ]) }}">編輯</a></td>
                     <td>
-                        <form action="{{ url('/monitors/delete', ['id' => $monitor->id]) }}" method="post">
-                            <input class="btn btn-default" type="submit" value="刪除" />
+                        <form action="{{ url('/monitors/delete',['id'=>$monitor->id]) }}" method="post">
+                            <input class="btn btn-default" type="submit" value="刪除"/>
                             @method('delete')
                             @csrf
                         </form>
-                   </td>
+
+                    </td>
                 </tr>
             @endforeach
         </table>

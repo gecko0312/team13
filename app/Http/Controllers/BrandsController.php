@@ -14,7 +14,6 @@ class BrandsController extends Controller
      */
     public function index()
     {
-        //
         $brands=Brand::all();
         return view('brands.index')->with('brands',$brands);
     }
@@ -27,6 +26,7 @@ class BrandsController extends Controller
     public function create()
     {
         //
+        return view('brands.create');
     }
 
     /**
@@ -52,6 +52,7 @@ class BrandsController extends Controller
         $monitors=$brand->monitors;
         return view('brands.show',['brand'=>$brand,'monitors'=>$monitors]);
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -60,8 +61,9 @@ class BrandsController extends Controller
      */
     public function edit($id)
     {
-        //
-        return Brand::findOrfail($id)->toArray();
+        $brand= Brand::findOrfail($id);
+        return view('brands.edit',['brand'=>$brand]);
+
     }
 
     /**
@@ -84,8 +86,7 @@ class BrandsController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $brand = Brand::findOrFail($id);
+        $brand=Brand::findOrfail($id);
         $brand->delete();
         return redirect('brands');
     }
