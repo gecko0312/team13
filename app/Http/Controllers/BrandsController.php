@@ -26,6 +26,7 @@ class BrandsController extends Controller
      */
     public function create()
     {
+        return view('brands.create');
         //
     }
 
@@ -37,6 +38,17 @@ class BrandsController extends Controller
      */
     public function store(Request $request)
     {
+        $num = $request->input('num');
+        $name = $request->input('name');
+        $local = $request->input('local');
+        $time = $request->input('time');
+        Brand::create([
+            'id' => $num,
+            'bname' => $name,
+            'location' => $local,
+            'brand_time' => $time
+        ]);
+        return redirect('brands');
         //
     }
 
@@ -48,7 +60,7 @@ class BrandsController extends Controller
      */
     public function show($id)
     {
-        $brands=brands::findOrFail($id);
+        $brands=Brand::findOrFail($id);
         return view('brands.show')->with('brands',$brands);
     }
 
@@ -60,6 +72,8 @@ class BrandsController extends Controller
      */
     public function edit($id)
     {
+        $brands=Brand::findOrFail($id);
+        return view('brands.edit')->with('brands',$brands);
         //
     }
 
@@ -72,6 +86,13 @@ class BrandsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $brand = Brand::findOrFail($id);
+        $brand->$num = $request->input('num');
+        $brand->$name = $request->input('name');
+        $brand->$local = $request->input('local');
+        $brand->$time = $request->input('time');
+        $brand->save();
+        return redirect('brands');
         //
     }
 

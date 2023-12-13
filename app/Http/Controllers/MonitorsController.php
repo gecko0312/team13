@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Monitor;
+use App\Models\Brand;
 
 class MonitorsController extends Controller
 {
@@ -14,7 +15,6 @@ class MonitorsController extends Controller
      */
     public function index()
     {
-        //
         $monitors= Monitor::all();
         return view('monitors.index')->with('monitors',$monitors);
     }
@@ -26,7 +26,8 @@ class MonitorsController extends Controller
      */
     public function create()
     {
-        //
+        $brands = Brand::orderBy('brands.id', 'asc')->pluck('brands.bname', 'brands.id');
+        return view('monitors.create', ['brands' =>$brands, 'brandSelected' => null]);
     }
 
     /**
@@ -37,7 +38,28 @@ class MonitorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $product_model = $request->input('product_model');
+        $bid = $request->input('bid');
+        $size= $request->input('size');
+        $nits = $request->input('nits');
+        $hz = $request->input('hz');
+        $panel = $request->input('panel');
+        $speaker = $request->input('speaker');
+        $resolution = $request->input('resolution');
+        $price = $request->input('price');
+        $monitor=Monitor::create([
+            'id'=>$id,
+            'product_model'=>$product_model ,
+            'bid'=>$bid,
+            'size'=>$size,
+            'nits'=>$nits,
+            'hz'=>$hz,
+            'panel'=>$panel,
+            'speaker'=>$speaker,
+            'resolution'=>$resolution,
+            'price'=>$price]);
+        return redirect('monitors');
     }
 
     /**
@@ -60,7 +82,10 @@ class MonitorsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $monitor= Monitor::findOrFail($id);
+        $brands = Brand::orderBy('brands.id', 'asc')->pluck('brands.name', 'brands.id');
+        $selected_tags = $monitor->brands->id;
+        return view('monitor.edit', ['monitor' =>$monitor, 'brands' => $brands, 'brandsSelected' => $selected_tags]);
     }
 
     /**
@@ -72,7 +97,19 @@ class MonitorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $monitor= Monitor::findOrFail($id);
+        $monitor->$id = $request->input('id');
+        $monitor->$product_model = $request->input('product_model');
+        $monitor->$bid = $request->input('bid');
+        $monitor->$size= $request->input('size');
+        $monitor->$nits = $request->input('nits');
+        $monitor->$hz = $request->input('hz');
+        $monitor->$panel = $request->input('panel');
+        $monitor->$speaker = $request->input('speaker');
+        $monitor->$resolution = $request->input('resolution');
+        $monitor->$price = $request->input('price');
+        $monitor->save();
+        return redirect('monitors');
     }
 
     /**

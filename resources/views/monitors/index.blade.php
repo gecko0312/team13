@@ -19,6 +19,8 @@
                 <th>操作1</th>
                 <th>操作2</th>
                 <th>操作3</th>
+                <th>操作4</th>
+                <th>操作5</th>
             </tr>
             @foreach($monitors as $monitor)          
                   <tr>
@@ -41,6 +43,15 @@
                         @csrf
                         </form>
                     </td>
+                    <td>
+                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+                    <a href="{{ route('monitors.create') }} ">新增螢幕</a>
+                    </td>
+                    <td>
+                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+                    <a href="{{ route('monitors.index') }} ">所有螢幕</a>
+                    </td>
+                </div>
                 </tr>
             @endforeach
         </table>

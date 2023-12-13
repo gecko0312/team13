@@ -14,6 +14,8 @@
                 <th>操作1</th>
                 <th>操作2</th>
                 <th>操作3</th>
+                <th>操作4</th>
+                <th>操作5</th>
             </tr>
             @foreach($brands as $brand)
                 <tr>
@@ -30,6 +32,15 @@
                         @csrf
                         </form>
                     </td>
+                    <td>
+                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+                    <a href="{{route('brands.create')}} ">新增廠商</a>
+                    </td>
+                    <td>
+                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+                    <a href="{{route('brands.index')}} ">所有廠商</a>
+                    </td>
+
                 </tr>
                 @endforeach
         </table>
