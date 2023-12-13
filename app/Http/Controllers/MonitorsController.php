@@ -27,6 +27,7 @@ class MonitorsController extends Controller
     public function create()
     {
         //
+        return view('monitors.create');
     }
 
     /**
@@ -60,7 +61,8 @@ class MonitorsController extends Controller
      */
     public function edit($id)
     {
-        return Monitor::findOrfail($id)->toArray();
+         $monitor= Monitor::findOrfail($id);
+        return view('monitors.edit',['monitor'=>$monitor]);
     }
 
     /**

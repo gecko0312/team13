@@ -26,6 +26,7 @@ class BrandsController extends Controller
     public function create()
     {
         //
+        return view('brands.create');
     }
 
     /**
@@ -60,7 +61,8 @@ class BrandsController extends Controller
      */
     public function edit($id)
     {
-        return Brand::findOrfail($id)->toArray();
+        $brand= Brand::findOrfail($id);
+        return view('brands.edit',['brand'=>$brand]);
 
     }
 
