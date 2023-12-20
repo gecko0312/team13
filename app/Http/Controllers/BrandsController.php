@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\CreateBrandRequest;
 use App\Models\Brand;
 
 class BrandsController extends Controller
@@ -35,7 +35,7 @@ class BrandsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateBrandRequest $request)
     {
         $bname=$request->input('bname');
         $location=$request->input('location');
@@ -83,7 +83,7 @@ class BrandsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateBrandRequest $request, $id)
     {
         $brand=Brand::findOrfail($id);
 
