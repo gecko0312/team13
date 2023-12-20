@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\CreateMonitorRequest;
 use App\Models\Monitor;
 use App\Models\Brand;
 
@@ -39,7 +39,7 @@ class MonitorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateMonitorRequest $request)
     {
         $product_model=$request->input('product_model');
         $bid=$request->input('bid');
@@ -99,7 +99,7 @@ class MonitorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateMonitorRequest $request, $id)
     {
         $monitor=Monitor::findOrfail($id);
 
