@@ -1,6 +1,10 @@
 <div class="form-group">
+    {!! Form::label('id', '編號：') !!}
+    {!! Form::text('id', null, ['class' => 'form-control']) !!}
+</div>
+<div class="form-group">
     {!! Form::label('bid', '廠牌：') !!}
-    {!! Form::select('bid', $brands, $brandSelected, ['class' => 'form-control']) !!}
+    {!! Form::select('bid', $brands, $brandsSelected, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
     {!! Form::label('product_model', '產品型號:') !!}

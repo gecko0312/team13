@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\CreateMonitorRequest;
 use App\Models\Monitor;
 use App\Models\Brand;
 
@@ -27,7 +27,7 @@ class MonitorsController extends Controller
     public function create()
     {
         $brands = Brand::orderBy('brands.id', 'asc')->pluck('brands.bname', 'brands.id');
-        return view('monitors.create', ['brands' =>$brands, 'brandSelected' => null]);
+        return view('monitors.create', ['brands' =>$brands, 'brandsSelected' => null]);
     }
 
     /**
@@ -36,8 +36,8 @@ class MonitorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(CreateMonitorRequest $request) 
+       {
         $id = $request->input('id');
         $product_model = $request->input('product_model');
         $bid = $request->input('bid');
@@ -50,7 +50,7 @@ class MonitorsController extends Controller
         $price = $request->input('price');
         $monitor=Monitor::create([
             'id'=>$id,
-            'product_model'=>$product_model ,
+            'product_model'=>$product_model,
             'bid'=>$bid,
             'size'=>$size,
             'nits'=>$nits,
@@ -83,9 +83,9 @@ class MonitorsController extends Controller
     public function edit($id)
     {
         $monitor= Monitor::findOrFail($id);
-        $brands = Brand::orderBy('brands.id', 'asc')->pluck('brands.name', 'brands.id');
+        $brands = Brand::orderBy('brands.id', 'asc')->pluck('brands.bname', 'brands.id');
         $selected_tags = $monitor->brands->id;
-        return view('monitor.edit', ['monitor' =>$monitor, 'brands' => $brands, 'brandsSelected' => $selected_tags]);
+        return view('monitors.edit', ['monitor' =>$monitor, 'brands' => $brands, 'brandsSelected' => $selected_tags]);
     }
 
     /**
@@ -95,19 +95,19 @@ class MonitorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(CreateMonitorRequest $request, $id)
+        {
         $monitor= Monitor::findOrFail($id);
-        $monitor->$id = $request->input('id');
-        $monitor->$product_model = $request->input('product_model');
-        $monitor->$bid = $request->input('bid');
-        $monitor->$size= $request->input('size');
-        $monitor->$nits = $request->input('nits');
-        $monitor->$hz = $request->input('hz');
-        $monitor->$panel = $request->input('panel');
-        $monitor->$speaker = $request->input('speaker');
-        $monitor->$resolution = $request->input('resolution');
-        $monitor->$price = $request->input('price');
+        $monitor->id = $request->input('id');
+        $monitor->product_model = $request->input('product_model');
+        $monitor->bid = $request->input('bid');
+        $monitor->size= $request->input('size');
+        $monitor->nits = $request->input('nits');
+        $monitor->hz = $request->input('hz');
+        $monitor->panel = $request->input('panel');
+        $monitor->speaker = $request->input('speaker');
+        $monitor->resolution = $request->input('resolution');
+        $monitor->price = $request->input('price');
         $monitor->save();
         return redirect('monitors');
     }
