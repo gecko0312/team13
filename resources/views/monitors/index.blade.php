@@ -36,9 +36,9 @@
                     <td><a href="{{ route('monitors.edit',['id'=>$monitor->id]) }}">編輯</a></td>
                     <td><a href="{{ route('monitors.show',['id'=>$monitor->id]) }}">顯示</a></td>
                     <td>
-                        <form action="{{ url('monitors/delete',['id'=> $monitor->id]) }}"  mehod="post">
+                        <form action="{{ url('monitors/delete',['id'=> $monitor->id]) }}"  method="post">
                             <input class="btn btn-default" type="submit" value="刪除" />
-                            @mehod('delete')
+                            @method('delete')
                             @csrf
                         </from>
                     </td> 

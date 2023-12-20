@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\CreateBrandRequest;
 use App\Models\Brand;
 
 class BrandsController extends Controller
@@ -14,10 +14,8 @@ class BrandsController extends Controller
      */
     public function index()
     {
-        //從Model拿資料
-        $brands = Brand::all();
-        //把資料送給view
-        return view("brands.index")->with('brands',$brands);
+        $brands=Brand::all();
+        return view('brands.index')->with('brands',$brands);
     }
 
     /**
@@ -28,6 +26,7 @@ class BrandsController extends Controller
     public function create()
     {
         //
+        return view('brands.create');
     }
 
     /**
@@ -36,9 +35,19 @@ class BrandsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateBrandRequest $request)
     {
-        //
+        $bname=$request->input('bname');
+        $location=$request->input('location');
+        $brand_time=$request->input('brand_time');
+
+        $brand=Brand::create([
+            'bname'=>$bname,
+            'location'=>$location,
+            'brand_time'=>$brand_time,
+        ]);
+
+        return redirect('brands');
     }
 
     /**
@@ -50,7 +59,6 @@ class BrandsController extends Controller
     public function show($id)
     {
         $brand=Brand::findOrfail($id);
-        
         $monitors=$brand->monitors;
         return view('brands.show',['brand'=>$brand,'monitors'=>$monitors]);
     }
@@ -63,7 +71,9 @@ class BrandsController extends Controller
      */
     public function edit($id)
     {
-        return Brand::findOrfail($id)->toArray();
+        $brand= Brand::findOrfail($id);
+        return view('brands.edit',['brand'=>$brand]);
+
     }
 
     /**
@@ -73,9 +83,16 @@ class BrandsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateBrandRequest $request, $id)
     {
-        //
+        $brand=Brand::findOrfail($id);
+
+        $brand->bname=$request->input('bname');
+        $brand->location=$request->input('location');
+        $brand->brand_time=$request->input('brand_time');
+        $brand->save();
+
+        return redirect('brands');
     }
 
     /**
@@ -86,6 +103,8 @@ class BrandsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $brand=Brand::findOrfail($id);
+        $brand->delete();
+        return redirect('brands');
     }
 }

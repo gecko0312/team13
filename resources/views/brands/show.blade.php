@@ -11,7 +11,7 @@
 
 <h1>顯示所有電腦螢幕資訊</h1>
         <table>
-        <table width=100% class="monitor_table">
+        <table width=130% class="monitor_table">
             <tr>
                 <th>編號</th>
                 <th>產品型號</th>
