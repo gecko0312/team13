@@ -8,6 +8,14 @@
         
         <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
         <a href="{{ route('monitors.create') }}"> 新增螢幕資料</a>
+        </br>
+        <a href="{{ route('monitors.have_speaker') }}"> 有喇叭的螢幕資料</a>
+        <form action="{{ url('monitors/panel') }}" method='POST'>
+            {!! Form::label('pan','選取面板') !!}
+            {!! Form::select('pan',$panels,['class'=>'form-control']) !!}
+            <input class="btn btn-default" type="submit" value="查詢"/>
+            @csrf
+        </form>
         </div>
         
         <table width=100% class="monitor_table">
@@ -51,6 +59,7 @@
                 </tr>
             @endforeach
         </table>
+        {{ $monitors->links() }}
         <style>
             .monitor_table{
                 text-align:center

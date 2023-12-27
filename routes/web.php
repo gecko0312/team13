@@ -21,33 +21,41 @@ use App\Http\Controllers\MonitorsController;
 Route::get('/',function(){
     return redirect('monitors'); 
 });
-//顯示所有螢幕表格
+// 顯示 所有 螢幕 表格
 Route::get('monitors',[MonitorsController::class,'index'])->name('monitors.index');
-//顯示單一螢幕資料
+// 顯示 單一 螢幕 資料
 Route::get('monitors/{id}',[MonitorsController::class,'show'])->where('id','[0-9]+')->name('monitors.show');
-//編輯單一螢幕資料
+// 編輯 單一 螢幕 資料
 Route::get('monitors/{id}/edit',[MonitorsController::class,'edit'])->where('id','[0-9]+')->name('monitors.edit');
-//刪除單一螢幕資料
+//刪除 單一 螢幕 資料
 Route::delete('monitors/delete/{id}',[MonitorsController::class,'destroy'])->where('id','[0-9]+')->name('monitors.destroy');
-//新增螢幕資料
+// 新增 螢幕 資料
 Route::get('monitors/create',[MonitorsController::class,'create'])->name('monitors.create');
-//修改螢幕資料
+// 修改 螢幕 資料
 Route::patch('monitors/update/{id}',[MonitorsController::class,'update'])->where('id','[0-9]+')->name('monitors.update');
-//儲存螢幕資料
+// 儲存 螢幕 資料
 Route::post('monitors/store',[MonitorsController::class,'store'])->name('monitors.store');
+// 顯示 有喇叭 螢幕 資料
+Route::get('monitors/have_speaker',[MonitorsController::class,'have_speaker'])->name('monitors.have_speaker');
+// 選定面板 查詢 螢幕 資料
+Route::post('monitors/panel',[MonitorsController::class,'panel'])->name('monitors.panel');
 
-
-//顯示所有廠牌表格
+// 顯示 所有 廠牌 表格
 Route::get('brands',[BrandsController::class,'index'])->name('brands.index');
-//顯示單一廠牌資料
+// 顯示 單一 廠牌 資料
 Route::get('brands/{id}',[BrandsController::class,'show'])->where('id','[0-9]+')->name('brands.show');
-//編輯單一廠牌資料
+// 編輯 單一 廠牌 資料
 Route::get('brands/{id}/edit',[BrandsController::class,'edit'])->where('id','[0-9]+')->name('brands.edit');
-//刪除單一廠牌資料
+//刪除 單一 廠牌 資料
 Route::delete('brands/delete/{id}',[BrandsController::class,'destroy'])->where('id','[0-9]+')->name('brands.destroy');
-//新增廠牌資料
+// 新增 廠牌 資料
 Route::get('brands/create',[BrandsController::class,'create'])->name('brands.create');
-//修改廠牌資料
+// 修改 廠牌 資料
 Route::patch('brands/update/{id}',[BrandsController::class,'update'])->where('id','[0-9]+')->name('brands.update');
-//儲存廠牌資料
+// 儲存 廠牌 資料
 Route::post('brands/store',[BrandsController::class,'store'])->name('brands.store');
+// 顯示 成立超過50年 廠牌 資料
+Route::get('monitors/over_fifty',[BrandsController::class,'over_fifty'])->name('brands.over_fifty');
+// 選定地區 查詢 廠牌 資料
+Route::post('brands/location',[BrandsController::class,'location'])->name('brands.location');
+
