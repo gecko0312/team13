@@ -19,7 +19,7 @@ class BrandsController extends Controller
         $brands=Brand::paginate(25);
         $locations=Brand::alllocation()->pluck('brands.location','brands.location');
         // return view('brands.index')->with('brands',$brands);
-        return view('brands.index',['brands'=>$brands,'locations'=>$locations]);
+        return view('brands.index',['brands'=>$brands,'locations'=>$locations,'selectedLocation'=>null]);
     }
 
     public function over_fifty()
@@ -27,7 +27,7 @@ class BrandsController extends Controller
         $brands=Brand::over_year(50)->paginate(25);
         $locations=Brand::alllocation()->pluck('brands.location','brands.location');
         // return view('brands.index')->with('brands',$brands);
-        return view('brands.index',['brands'=>$brands,'locations'=>$locations]);
+        return view('brands.index',['brands'=>$brands,'locations'=>$locations,'selectedLocation'=>null]);
 
     }
 
@@ -36,7 +36,8 @@ class BrandsController extends Controller
         $brands=Brand::location($request->input('loc'))->paginate(25);
         $locations=Brand::alllocation()->pluck('brands.location','brands.location');
         // return view('brands.index')->with('brands',$brands);
-        return view('brands.index',['brands'=>$brands,'locations'=>$locations]);
+        $selectedLocation=$request->input('loc');
+        return view('brands.index',['brands'=>$brands,'locations'=>$locations,'selectedLocation'=>$selectedLocation]);
 
     }
 

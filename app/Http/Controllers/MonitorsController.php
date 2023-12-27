@@ -21,7 +21,7 @@ class MonitorsController extends Controller
         $monitors= Monitor::paginate(25);
         $panels= Monitor::allpanel()->pluck('monitors.panel','monitors.panel');
         // return view('monitors.index')->with('monitors',$monitors);
-        return view('monitors.index',['monitors'=>$monitors,'panels'=>$panels]);
+        return view('monitors.index',['monitors'=>$monitors,'panels'=>$panels,'selectedPanel'=>null]);
     }
 
     public function have_speaker()
@@ -30,7 +30,7 @@ class MonitorsController extends Controller
         $monitors= Monitor::have_speaker()->paginate(25);
         $panels= Monitor::allpanel()->pluck('monitors.panel','monitors.panel');
         // return view('monitors.index')->with('monitors',$monitors);
-        return view('monitors.index',['monitors'=>$monitors,'panels'=>$panels]);
+        return view('monitors.index',['monitors'=>$monitors,'panels'=>$panels,'selectPanel'=>null]);
     }
 
     public function panel(Request $request )
@@ -38,7 +38,8 @@ class MonitorsController extends Controller
         //
         $monitors=Monitor::panel($request->input('pan'))->paginate(25);
         $panels= Monitor::allpanel()->pluck('monitors.panel','monitors.panel');
-        return view('monitors.index',['monitors'=>$monitors,'panels'=>$panels]);
+        $selectedPanel=$request->input('pan');
+        return view('monitors.index',['monitors'=>$monitors,'panels'=>$panels,'selectedPanel'=>$selectedPanel]);
     }
 
     /**

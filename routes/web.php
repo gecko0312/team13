@@ -38,7 +38,7 @@ Route::post('monitors/store',[MonitorsController::class,'store'])->name('monitor
 // 顯示 有喇叭 螢幕 資料
 Route::get('monitors/have_speaker',[MonitorsController::class,'have_speaker'])->name('monitors.have_speaker');
 // 選定面板 查詢 螢幕 資料
-Route::post('monitors/panel',[MonitorsController::class,'panel'])->name('monitors.panel');
+Route::get('monitors/panel',[MonitorsController::class,'panel'])->name('monitors.panel');
 
 // 顯示 所有 廠牌 表格
 Route::get('brands',[BrandsController::class,'index'])->name('brands.index');
@@ -57,6 +57,6 @@ Route::post('brands/store',[BrandsController::class,'store'])->name('brands.stor
 // 顯示 成立超過50年 廠牌 資料
 Route::get('monitors/over_fifty',[BrandsController::class,'over_fifty'])->name('brands.over_fifty');
 // 選定地區 查詢 廠牌 資料
-Route::post('brands/location',[BrandsController::class,'location'])->name('brands.location');
+Route::get('brands/location',[BrandsController::class,'location'])->name('brands.location');
 
 

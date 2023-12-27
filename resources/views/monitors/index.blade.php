@@ -10,9 +10,9 @@
         <a href="{{ route('monitors.create') }}"> 新增螢幕資料</a>
         </br>
         <a href="{{ route('monitors.have_speaker') }}"> 有喇叭的螢幕資料</a>
-        <form action="{{ url('monitors/panel') }}" method='POST'>
+        <form action="{{ url('monitors/panel') }}" method='GET'>
             {!! Form::label('pan','選取面板') !!}
-            {!! Form::select('pan',$panels,['class'=>'form-control']) !!}
+            {!! Form::select('pan',$panels,$selectedPanel,['class'=>'form-control']) !!}
             <input class="btn btn-default" type="submit" value="查詢"/>
             @csrf
         </form>
@@ -59,7 +59,7 @@
                 </tr>
             @endforeach
         </table>
-        {{ $monitors->links() }}
+        {{ $monitors->withQueryString()->links() }}
         <style>
             .monitor_table{
                 text-align:center

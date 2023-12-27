@@ -10,9 +10,9 @@
         <a href="{{ route('brands.create') }}"> 新增廠牌資料</a>
         <br/>
         <a href="{{ route('brands.over_fifty') }}">成立超過50年的廠牌資料</a>
-        <form action="{{ url('brands/location') }}" method='POST'>
+        <form action="{{ url('brands/location') }}" method='GET'>
             {!! Form::label('loc','選取地區') !!}
-            {!! Form::select('loc',$locations,['class'=>'form-control']) !!}
+            {!! Form::select('loc',$locations,$selectedLocation,['class'=>'form-control']) !!}
             <input class="btn btn-default" type="submit" value="查詢"/>
             @csrf
         </form>
@@ -46,7 +46,7 @@
                 </tr>
             @endforeach
         </table>
-        {{ $brands->links() }}
+        {{ $brands->withQueryString()->links() }}
         <style>
             .brand_table{
                 text-align:center
