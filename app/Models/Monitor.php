@@ -24,5 +24,13 @@ class Monitor extends Model
     {
         return $this->belongsTo('App\Models\Brand','bid','id');
     }
+    public function scopeAllpanel($query)
+    { 
+        return $query->select('panel')->groupBy('panel');
+    }
+    public function scopePanel($query,$pan)
+    { 
+        return $query->where('panel','=',$pan);
+    }
 
 }

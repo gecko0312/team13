@@ -23,4 +23,8 @@ class Brand extends Model
         $this->monitor()->delete();
         return parent::delete();
     }
+    public function location($location)
+    {
+        $query->where('location', '=', $location);
+    }
 }

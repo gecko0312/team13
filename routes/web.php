@@ -40,3 +40,4 @@ Route::get('brands/{id}/edit', [BrandsController::class, 'edit'])->where('id', '
 Route::patch('brands/update/{id}', [BrandsController::class, 'update'])->where('id', '[0-9]+')->name('brands.update');
 Route::post('monitors/store', [MonitorsController::class, 'store'])->where('id', '[0-9]+')->name('monitors.store');
 Route::post('brands/store', [BrandsController::class, 'store'])->where('id', '[0-9]+')->name('brands.store');
+Route::get('monitors/panel', [MonitorsController::class, 'panel'])->name('monitors.panel');

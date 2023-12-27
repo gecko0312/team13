@@ -95,7 +95,6 @@ class BrandsController extends Controller
         return redirect('brands');
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateMonitorRequest;
 use App\Models\Monitor;
 use App\Models\Brand;
-
+use Illuminate\Http\Request;
 class MonitorsController extends Controller
 {
     /**
@@ -15,8 +15,10 @@ class MonitorsController extends Controller
      */
     public function index()
     {
-        $monitors= Monitor::all();
-        return view('monitors.index')->with('monitors',$monitors);
+        $monitors = Monitor::paginate(25);
+        $panel = Monitor::Allpanels()->pluck('monitors.panel', 'monitors.panel');
+        // 把資料送給 view
+        return view('monitors.index', ['monitors' => $monitors, 'panel'=>$panel, 'selectedpanel'=>null]);
     }
 
     /**
@@ -61,6 +63,14 @@ class MonitorsController extends Controller
             'price'=>$price]);
         return redirect('monitors');
     }
+    public function panel(Request $request)
+    {
+        $monitors = Monitor::all();
+        $monitor =Monitor::panel($request->input('pan'))->get();
+        $panel = Monitor::allpanel()->pluck('monitors.panel', 'monitors.panel');
+        $selectedpanel=$request->input('pan');
+        return view('monitors.index', ['monitors' => $monitor, 'panel'=>$panel,'selectedpanel'=>$selectedpanel]);
+    }    
 
     /**
      * Display the specified resource.

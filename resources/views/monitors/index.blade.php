@@ -5,6 +5,15 @@
 @section('monitor_contents')
         <h1>顯示所有電腦螢幕資訊</h1>
         <table width=100% class="monitor_table">
+        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+        <a href="{{  route('brands.create') }} ">資深球員</a>
+        <form action="{{ url('monitors/panel') }}" method='GET'>
+        {!! Form::label('pan', '選取位置：') !!}
+        {!! Form::select('pan', $panel, $selectedpanel, ['class' => 'form-control']) !!}
+        <input class="btn btn-default" type="submit" value="查詢" />
+        @csrf
+    </form>    
+        </div>
             <tr>
                 <th>編號</th>
                 <th>產品型號</th>
@@ -19,8 +28,6 @@
                 <th>操作1</th>
                 <th>操作2</th>
                 <th>操作3</th>
-                <th>操作4</th>
-                <th>操作5</th>
             </tr>
             @foreach($monitors as $monitor)          
                   <tr>
@@ -43,14 +50,9 @@
                         @csrf
                         </form>
                     </td>
+                  
                     <td>
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                    <a href="{{ route('monitors.create') }} ">新增螢幕</a>
-                    </td>
-                    <td>
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                    <a href="{{ route('monitors.index') }} ">所有螢幕</a>
-                    </td>
+                 
                 </div>
                 </tr>
             @endforeach
