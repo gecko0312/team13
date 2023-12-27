@@ -30,7 +30,7 @@ class MonitorsController extends Controller
         $monitors= Monitor::have_speaker()->paginate(25);
         $panels= Monitor::allpanel()->pluck('monitors.panel','monitors.panel');
         // return view('monitors.index')->with('monitors',$monitors);
-        return view('monitors.index',['monitors'=>$monitors,'panels'=>$panels,'selectPanel'=>null]);
+        return view('monitors.index',['monitors'=>$monitors,'panels'=>$panels,'selectedPanel'=>null]);
     }
 
     public function panel(Request $request )
