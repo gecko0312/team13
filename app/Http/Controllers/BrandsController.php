@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBrandRequest;
 use App\Models\Brand;
+use Illuminate\Http\Request;
+
 
 class BrandsController extends Controller
 {
@@ -14,9 +16,30 @@ class BrandsController extends Controller
      */
     public function index()
     {
-        $brands=Brand::all();
-        return view('brands.index')->with('brands',$brands);
+        $brands=Brand::paginate(25);
+        $locations=Brand::alllocation()->pluck('brands.location','brands.location');
+        // return view('brands.index')->with('brands',$brands);
+        return view('brands.index',['brands'=>$brands,'locations'=>$locations]);
     }
+
+    public function over_fifty()
+    {
+        $brands=Brand::over_year(50)->paginate(25);
+        $locations=Brand::alllocation()->pluck('brands.location','brands.location');
+        // return view('brands.index')->with('brands',$brands);
+        return view('brands.index',['brands'=>$brands,'locations'=>$locations]);
+
+    }
+
+    public function location(Request $request )
+    {
+        $brands=Brand::location($request->input('loc'))->paginate(25);
+        $locations=Brand::alllocation()->pluck('brands.location','brands.location');
+        // return view('brands.index')->with('brands',$brands);
+        return view('brands.index',['brands'=>$brands,'locations'=>$locations]);
+
+    }
+
 
     /**
      * Show the form for creating a new resource.

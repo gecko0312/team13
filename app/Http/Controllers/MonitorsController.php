@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateMonitorRequest;
 use App\Models\Monitor;
 use App\Models\Brand;
+use Illuminate\Http\Request;
 
 
 class MonitorsController extends Controller
@@ -17,8 +18,27 @@ class MonitorsController extends Controller
     public function index()
     {
         //
-        $monitors= Monitor::all();
-        return view('monitors.index')->with('monitors',$monitors);
+        $monitors= Monitor::paginate(25);
+        $panels= Monitor::allpanel()->pluck('monitors.panel','monitors.panel');
+        // return view('monitors.index')->with('monitors',$monitors);
+        return view('monitors.index',['monitors'=>$monitors,'panels'=>$panels]);
+    }
+
+    public function have_speaker()
+    {
+        //
+        $monitors= Monitor::have_speaker()->paginate(25);
+        $panels= Monitor::allpanel()->pluck('monitors.panel','monitors.panel');
+        // return view('monitors.index')->with('monitors',$monitors);
+        return view('monitors.index',['monitors'=>$monitors,'panels'=>$panels]);
+    }
+
+    public function panel(Request $request )
+    {
+        //
+        $monitors=Monitor::panel($request->input('pan'))->paginate(25);
+        $panels= Monitor::allpanel()->pluck('monitors.panel','monitors.panel');
+        return view('monitors.index',['monitors'=>$monitors,'panels'=>$panels]);
     }
 
     /**

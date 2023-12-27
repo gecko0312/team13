@@ -8,6 +8,14 @@
         
         <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
         <a href="{{ route('brands.create') }}"> 新增廠牌資料</a>
+        <br/>
+        <a href="{{ route('brands.over_fifty') }}">成立超過50年的廠牌資料</a>
+        <form action="{{ url('brands/location') }}" method='POST'>
+            {!! Form::label('loc','選取地區') !!}
+            {!! Form::select('loc',$locations,['class'=>'form-control']) !!}
+            <input class="btn btn-default" type="submit" value="查詢"/>
+            @csrf
+        </form>
         </div>
 
         <table width=100% class="brand_table">
@@ -38,6 +46,7 @@
                 </tr>
             @endforeach
         </table>
+        {{ $brands->links() }}
         <style>
             .brand_table{
                 text-align:center
