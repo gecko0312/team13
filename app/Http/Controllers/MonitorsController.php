@@ -107,9 +107,11 @@ class MonitorsController extends Controller
      */
     public function edit($id)
     {
-         $monitor= Monitor::findOrfail($id);
-         $brands=Brand::orderBy('brands.id','asc')->pluck('brands.bname','brands.id');
-         $selected_tags=$monitor->brand->bid;
+        parent::edit($id);
+        
+        $monitor= Monitor::findOrfail($id);
+        $brands=Brand::orderBy('brands.id','asc')->pluck('brands.bname','brands.id');
+        $selected_tags=$monitor->brand->bid;
         return view('monitors.edit',['monitor'=>$monitor,'brands'=>$brands,'brandSelected'=>$selected_tags]);
     }
 
@@ -150,3 +152,4 @@ class MonitorsController extends Controller
         return redirect('monitors');
     }
 }
+
