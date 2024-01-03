@@ -41,3 +41,10 @@ Route::patch('brands/update/{id}', [BrandsController::class, 'update'])->where('
 Route::post('monitors/store', [MonitorsController::class, 'store'])->where('id', '[0-9]+')->name('monitors.store');
 Route::post('brands/store', [BrandsController::class, 'store'])->where('id', '[0-9]+')->name('brands.store');
 Route::get('monitors/panel', [MonitorsController::class, 'panel'])->name('monitors.panel');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('monitors/have_speaker',[MonitorsController::class,'have_speaker'])->name('monitors.have_speaker');
+Route::get('monitors/over_fifty',[BrandsController::class,'over_fifty'])->name('brands.over_fifty');
+Route::get('brands/location',[BrandsController::class,'location'])->name('brands.location');

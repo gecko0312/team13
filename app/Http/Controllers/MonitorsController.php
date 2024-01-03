@@ -16,9 +16,15 @@ class MonitorsController extends Controller
     public function index()
     {
         $monitors = Monitor::paginate(25);
-        $panel = Monitor::Allpanels()->pluck('monitors.panel', 'monitors.panel');
+        $panel = Monitor::Allpanel()->pluck('monitors.panel', 'monitors.panel');
         // 把資料送給 view
         return view('monitors.index', ['monitors' => $monitors, 'panel'=>$panel, 'selectedpanel'=>null]);
+    }
+    public function have_speaker()
+    {
+        $monitors= Monitor::have_speaker()->paginate(25);
+        $panel= Monitor::allpanel()->pluck('monitors.panel','monitors.panel');
+        return view('monitors.index',['monitors'=>$monitors,'panel'=>$panel, 'selectedpanel'=>null]);
     }
 
     /**

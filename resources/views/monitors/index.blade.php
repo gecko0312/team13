@@ -6,9 +6,11 @@
         <h1>顯示所有電腦螢幕資訊</h1>
         <table width=100% class="monitor_table">
         <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-        <a href="{{  route('brands.create') }} ">資深球員</a>
+        <a href="{{  route('monitors.create') }} ">新增螢幕</a>
+</br>
+        <a href="{{ route('monitors.have_speaker') }}"> 有喇叭的螢幕資料</a>
         <form action="{{ url('monitors/panel') }}" method='GET'>
-        {!! Form::label('pan', '選取位置：') !!}
+        {!! Form::label('pan', '選取面板：') !!}
         {!! Form::select('pan', $panel, $selectedpanel, ['class' => 'form-control']) !!}
         <input class="btn btn-default" type="submit" value="查詢" />
         @csrf
@@ -57,7 +59,8 @@
                 </tr>
             @endforeach
         </table>
-        <style>
+        {{ $monitors->withQueryString()->links() }}
+                <style>
             .monitor_table{
                 text-align:center
             }

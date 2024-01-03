@@ -101,7 +101,7 @@ class MonitorsTableSeeder extends Seeder
 
             DB::table('monitors')->insert([
                 'product_model' => $product_model,
-                'bid' => $i+1,
+                'bid' => rand(1,30),
                 'size' => $size,
                 'hz' => $hz,
                 'resolution' => $resolution,
