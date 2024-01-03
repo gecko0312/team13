@@ -107,6 +107,8 @@ class MonitorsController extends Controller
      */
     public function edit($id)
     {
+        parent::edit($id);
+
          $monitor= Monitor::findOrfail($id);
          $brands=Brand::orderBy('brands.id','asc')->pluck('brands.bname','brands.id');
          $selected_tags=$monitor->brand->bid;
