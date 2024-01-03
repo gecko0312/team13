@@ -60,3 +60,7 @@ Route::get('monitors/over_fifty',[BrandsController::class,'over_fifty'])->name('
 Route::get('brands/location',[BrandsController::class,'location'])->name('brands.location');
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
