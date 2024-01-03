@@ -35,7 +35,10 @@ Route::get('monitors/create',[MonitorsController::class,'create'])->name('monito
 Route::patch('monitors/update/{id}',[MonitorsController::class,'update'])->where('id','[0-9]+')->name('monitors.update');
 // 儲存 螢幕 資料
 Route::post('monitors/store',[MonitorsController::class,'store'])->name('monitors.store');
-
+// 顯示 有喇叭 螢幕 資料
+Route::get('monitors/have_speaker',[MonitorsController::class,'have_speaker'])->name('monitors.have_speaker');
+// 選定面板 查詢 螢幕 資料
+Route::get('monitors/panel',[MonitorsController::class,'panel'])->name('monitors.panel');
 
 // 顯示 所有 廠牌 表格
 Route::get('brands',[BrandsController::class,'index'])->name('brands.index');
@@ -51,4 +54,8 @@ Route::get('brands/create',[BrandsController::class,'create'])->name('brands.cre
 Route::patch('brands/update/{id}',[BrandsController::class,'update'])->where('id','[0-9]+')->name('brands.update');
 // 儲存 廠牌 資料
 Route::post('brands/store',[BrandsController::class,'store'])->name('brands.store');
+// 顯示 成立超過50年 廠牌 資料
+Route::get('monitors/over_fifty',[BrandsController::class,'over_fifty'])->name('brands.over_fifty');
+// 選定地區 查詢 廠牌 資料
+Route::get('brands/location',[BrandsController::class,'location'])->name('brands.location');
 

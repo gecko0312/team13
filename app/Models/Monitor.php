@@ -24,4 +24,16 @@ class Monitor extends Model
     public function brand(){
         return $this->belongsTo('App\Models\Brand','bid','id');
     }
+
+    public function scopeHave_speaker($query){
+        return $query->where('speaker','=',1)->orderBy('price','asc');
+    }
+
+    public function scopeAllpanel($query){
+        return $query->select('panel')->groupBy('panel');
+    }
+
+    public function scopePanel($query,$pan){
+        return $query->where('panel','=',$pan);
+    }
 }

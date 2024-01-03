@@ -91,7 +91,7 @@ class MonitorsTableSeeder extends Seeder
 
     public function run()
     {
-        for( $i=0 ; $i <30 ; $i++){
+        for( $i=0 ; $i <500 ; $i++){
             $product_model=$this->RandomProductModel();
             $size=$this->RandomSize();
             $hz=$this->RandomHz();
@@ -101,7 +101,7 @@ class MonitorsTableSeeder extends Seeder
 
             DB::table('monitors')->insert([
                 'product_model' => $product_model,
-                'bid' => $i+1,
+                'bid' => rand(1,30),
                 'size' => $size,
                 'hz' => $hz,
                 'resolution' => $resolution,
