@@ -1,9 +1,13 @@
 @extends('app')
-@section('title', '建立廠商表單')
-@section('m_theme', '建立廠商的表單')
+
+@section('title','電腦螢幕查詢網站 - 新增廠牌資料')
+
 @section('monitor_contents')
-@include('message.list')
-    {!! Form::open(['url' => 'brands/store']) !!}
-    @include('brands.form', ['submitButtonText'=>'新增廠商資料'])
+    <h1>新增廠牌資料</h1>
+    @include('message.list')
+    {!! Form::open(['url'=>'brands/store']) !!}
+        @include('brands.form',['submitButtonText'=>"新增廠牌資料"])
     {!! Form::close() !!}
 @endsection
+
+

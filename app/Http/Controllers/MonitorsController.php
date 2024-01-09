@@ -6,6 +6,8 @@ use App\Http\Requests\CreateMonitorRequest;
 use App\Models\Monitor;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+
+
 class MonitorsController extends Controller
 {
     /**
@@ -15,16 +17,29 @@ class MonitorsController extends Controller
      */
     public function index()
     {
-        $monitors = Monitor::paginate(25);
-        $panel = Monitor::Allpanel()->pluck('monitors.panel', 'monitors.panel');
-        // 把資料送給 view
-        return view('monitors.index', ['monitors' => $monitors, 'panel'=>$panel, 'selectedpanel'=>null]);
+        //
+        $monitors= Monitor::paginate(25);
+        $panels= Monitor::allpanel()->pluck('monitors.panel','monitors.panel');
+        // return view('monitors.index')->with('monitors',$monitors);
+        return view('monitors.index',['monitors'=>$monitors,'panels'=>$panels,'selectedPanel'=>null]);
     }
+
     public function have_speaker()
     {
+        //
         $monitors= Monitor::have_speaker()->paginate(25);
-        $panel= Monitor::allpanel()->pluck('monitors.panel','monitors.panel');
-        return view('monitors.index',['monitors'=>$monitors,'panel'=>$panel, 'selectedpanel'=>null]);
+        $panels= Monitor::allpanel()->pluck('monitors.panel','monitors.panel');
+        // return view('monitors.index')->with('monitors',$monitors);
+        return view('monitors.index',['monitors'=>$monitors,'panels'=>$panels,'selectedPanel'=>null]);
+    }
+
+    public function panel(Request $request )
+    {
+        //
+        $monitors=Monitor::panel($request->input('pan'))->paginate(25);
+        $panels= Monitor::allpanel()->pluck('monitors.panel','monitors.panel');
+        $selectedPanel=$request->input('pan');
+        return view('monitors.index',['monitors'=>$monitors,'panels'=>$panels,'selectedPanel'=>$selectedPanel]);
     }
 
     /**
@@ -34,8 +49,9 @@ class MonitorsController extends Controller
      */
     public function create()
     {
-        $brands = Brand::orderBy('brands.id', 'asc')->pluck('brands.bname', 'brands.id');
-        return view('monitors.create', ['brands' =>$brands, 'brandsSelected' => null]);
+        //
+        $brands=Brand::orderBy('brands.id','asc')->pluck('brands.bname','brands.id');
+        return view('monitors.create',['brands'=>$brands,'brandSelected'=>null]);
     }
 
     /**
@@ -44,20 +60,19 @@ class MonitorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateMonitorRequest $request) 
-       {
-        $id = $request->input('id');
-        $product_model = $request->input('product_model');
-        $bid = $request->input('bid');
-        $size= $request->input('size');
-        $nits = $request->input('nits');
-        $hz = $request->input('hz');
-        $panel = $request->input('panel');
-        $speaker = $request->input('speaker');
-        $resolution = $request->input('resolution');
-        $price = $request->input('price');
+    public function store(CreateMonitorRequest $request)
+    {
+        $product_model=$request->input('product_model');
+        $bid=$request->input('bid');
+        $size=$request->input('size');
+        $nits=$request->input('nits');
+        $hz=$request->input('hz');
+        $panel=$request->input('panel');
+        $speaker=$request->input('speaker');
+        $resolution=$request->input('resolution');
+        $price=$request->input('price');
+
         $monitor=Monitor::create([
-            'id'=>$id,
             'product_model'=>$product_model,
             'bid'=>$bid,
             'size'=>$size,
@@ -66,17 +81,11 @@ class MonitorsController extends Controller
             'panel'=>$panel,
             'speaker'=>$speaker,
             'resolution'=>$resolution,
-            'price'=>$price]);
+            'price'=>$price,
+        ]);
         return redirect('monitors');
+        
     }
-    public function panel(Request $request)
-    {
-        $monitors = Monitor::all();
-        $monitor =Monitor::panel($request->input('pan'))->get();
-        $panel = Monitor::allpanel()->pluck('monitors.panel', 'monitors.panel');
-        $selectedpanel=$request->input('pan');
-        return view('monitors.index', ['monitors' => $monitor, 'panel'=>$panel,'selectedpanel'=>$selectedpanel]);
-    }    
 
     /**
      * Display the specified resource.
@@ -87,7 +96,7 @@ class MonitorsController extends Controller
     public function show($id)
     {
         $monitor= Monitor::findOrfail($id);
-        return view('monitors.show')->with('monitor',$monitor); 
+        return view('monitors.show')->with('monitor',$monitor);
     }
 
     /**
@@ -99,10 +108,11 @@ class MonitorsController extends Controller
     public function edit($id)
     {
         parent::edit($id);
-        $monitor= Monitor::findOrFail($id);
-        $brands = Brand::orderBy('brands.id', 'asc')->pluck('brands.bname', 'brands.id');
-        $selected_tags = $monitor->brands->id;
-        return view('monitors.edit', ['monitor' =>$monitor, 'brands' => $brands, 'brandsSelected' => $selected_tags]);
+
+         $monitor= Monitor::findOrfail($id);
+         $brands=Brand::orderBy('brands.id','asc')->pluck('brands.bname','brands.id');
+         $selected_tags=$monitor->brand->bid;
+        return view('monitors.edit',['monitor'=>$monitor,'brands'=>$brands,'brandSelected'=>$selected_tags]);
     }
 
     /**
@@ -113,18 +123,18 @@ class MonitorsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(CreateMonitorRequest $request, $id)
-        {
-        $monitor= Monitor::findOrFail($id);
-        $monitor->id = $request->input('id');
-        $monitor->product_model = $request->input('product_model');
-        $monitor->bid = $request->input('bid');
-        $monitor->size= $request->input('size');
-        $monitor->nits = $request->input('nits');
-        $monitor->hz = $request->input('hz');
-        $monitor->panel = $request->input('panel');
-        $monitor->speaker = $request->input('speaker');
-        $monitor->resolution = $request->input('resolution');
-        $monitor->price = $request->input('price');
+    {
+        $monitor=Monitor::findOrfail($id);
+
+        $monitor->product_model=$request->input('product_model');
+        $monitor->bid=$request->input('bid');
+        $monitor->size=$request->input('size');
+        $monitor->nits=$request->input('nits');
+        $monitor->hz=$request->input('hz');
+        $monitor->panel=$request->input('panel');
+        $monitor->speaker=$request->input('speaker');
+        $monitor->resolution=$request->input('resolution');
+        $monitor->price=$request->input('price');
         $monitor->save();
         return redirect('monitors');
     }
@@ -137,7 +147,7 @@ class MonitorsController extends Controller
      */
     public function destroy($id)
     {
-        $monitor= Monitor::findOrfail($id);
+        $monitor=Monitor::findOrfail($id);
         $monitor->delete();
         return redirect('monitors');
     }

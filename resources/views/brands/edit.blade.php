@@ -1,9 +1,14 @@
 @extends('app')
-@section('title', '編輯特定廠商')
-@section('m_theme', '編輯的廠商')
+
+@section('title','電腦螢幕查詢網站 - 編輯廠牌資料')
+
 @section('monitor_contents')
-@include('message.list')
-    {!! Form::model($brands, ['method'=>'PATCH', 'action'=>['\App\Http\Controllers\BrandsController@update', $brands->id]]) !!}
-    @include('brands.form', ['submitButtonText'=>"更新螢幕資料"])
+
+    <h1>編輯所選廠牌資料</h1>
+    @include('message.list')
+    {!! Form::model($brand ,['method'=>'PATCH', 'action'=>['\App\Http\Controllers\BrandsController@update',$brand->id]]) !!}
+        @include('brands.form',['submitButtonText'=>"更新廠牌資料"])
     {!! Form::close() !!}
 @endsection
+
+

@@ -15,28 +15,27 @@ class Brand extends Model
         'brand_time'
         
     ];
-    public function monitor()
-    {
+
+    public function monitors(){
         return $this->hasMany('App\Models\Monitor','bid');
     }
+
+    public function delete(){
+        $this->monitors()->delete();
+        return parent::delete();
+    }
+
     public function scopeOver_year($query,$subYear){
         $over_year=new Carbon();
         $over_year=Carbon::now()->subYearsNoOverflow($subYear);
         return $query->where('brand_time','<',$over_year)->orderBy('brand_time','asc');
     }
+    
     public function scopeAlllocation($query){
         return $query->select('location')->groupBy('location');
     }
+
     public function scopeLocation($query,$loc){
         return $query->where('location','=',$loc);
-    }
-    public function delete()
-    {
-        $this->monitor()->delete();
-        return parent::delete();
-    }
-    public function location($location)
-    {
-        $query->where('location', '=', $location);
     }
 }

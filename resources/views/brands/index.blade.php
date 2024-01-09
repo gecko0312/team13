@@ -4,20 +4,22 @@
 @section('title','電腦螢幕查詢網站 - 顯示所有廠牌資訊')
 
 @section('monitor_contents')
-<div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-@can('admin')
+        <h1>顯示所有廠牌資訊</h1>
+        
+        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+        @can('admin')
             <a href="{{ route('brands.create') }}"> 新增廠牌資料</a>
-    @endcan       
-         <br/>
+        @endcan
+        <br/>
         <a href="{{ route('brands.over_fifty') }}">成立超過50年的廠牌資料</a>
-        <form action="{{ url('brands/location') }}" method='POST'>
+        <form action="{{ url('brands/location') }}" method='GET'>
             {!! Form::label('loc','選取地區') !!}
-            {!! Form::select('loc',$locations,['class'=>'form-control']) !!}
+            {!! Form::select('loc',$locations,$selectedLocation,['class'=>'form-control']) !!}
             <input class="btn btn-default" type="submit" value="查詢"/>
             @csrf
         </form>
         </div>
-        <h1>顯示所有廠牌資訊</h1>
+
         <table width=100% class="brand_table">
             <tr>
                 <th>編號</th>
@@ -34,7 +36,7 @@
             </tr>
             @foreach($brands as $brand)
                 <tr>
-                   <td>{{ $brand->id }}</td>
+                    <td>{{ $brand->id }}</td>
                     <td>{{ $brand->bname }}</td>
                     <td>{{ $brand->location }}</td>
                     <td>{{ $brand->brand_time }}</td>
@@ -51,13 +53,11 @@
                     @elsecan('manager')
                         <td><a href="{{ route('brands.edit',['id'=>$brand->id ]) }}">編輯</a></td>
                     @endcan
-
-
                 </tr>
-                @endforeach
+            @endforeach
         </table>
         {{ $brands->withQueryString()->links() }}
-                <style>
+        <style>
             .brand_table{
                 text-align:center
             }

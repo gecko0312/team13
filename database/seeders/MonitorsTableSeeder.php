@@ -91,7 +91,7 @@ class MonitorsTableSeeder extends Seeder
 
     public function run()
     {
-        for( $i=0 ; $i <30 ; $i++){
+        for( $i=0 ; $i <500 ; $i++){
             $product_model=$this->RandomProductModel();
             $size=$this->RandomSize();
             $hz=$this->RandomHz();

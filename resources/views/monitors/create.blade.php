@@ -1,9 +1,13 @@
 @extends('app')
-@section('title', '建立產品表單')
-@section('m_theme', '建立產品的表單')
+
+@section('title','電腦螢幕查詢網站 - 新增螢幕資料')
+
 @section('monitor_contents')
-@include('message.list')
-    {!! Form::open(['url' => 'monitors/store']) !!}
-    @include('monitors.form', ['submitButtonText'=>"新增產品資料"])
+    <h1>新增螢幕資料</h1>
+    @include('message.list')
+    {!! Form::open(['url'=>'monitors/store']) !!}
+        @include('monitors.form',['submitButtonText'=>"新增螢幕資料"])
     {!! Form::close() !!}
 @endsection
+
+

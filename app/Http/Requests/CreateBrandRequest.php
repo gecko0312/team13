@@ -24,21 +24,24 @@ class CreateBrandRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'=>'required|min:1|max:100',
             'bname'=>'required|min:3|max:100',
             'location'=>'required|min:2|max:100',
-            'brand_time'=>'nullable|numeric',
-            'brand_time'=>'required',
-        ];
-    }
-    public function messages()
-    {
-        return[
-            'id.required'=>'編號 為必填項目',
-            'bname.required'=>'廠商名稱 為必填項目',
-            'location.required'=>'地區 為必填項目',
-            'brand_time.required'=>'成立時間 為必填項目',
+            'brand_time'=>'nullable|numeric'
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'bname.required'=>'名稱 為必填項目',
+            'bname.min'=>'名稱 至少3個字元',
+            'bname.max'=>'名稱 最多100個字元',
+
+            'location.required'=>'地區 為必填項目',
+            'location.min'=>'地區 至少2個字元',
+            'location.max'=>'地區 最多100個字元',
+            
+            'brand_time.numeric'=>'成立時間 必須為數字',
+        ];
+    }
 }

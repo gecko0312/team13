@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Providers;
-use App\Models\User;
+
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,15 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies();
-        Gate::define('admin', function($user){
-            return $user->role === User::role_admin;
-        });
-        Gate::define('manager', function($user){
-            return $user->role === User::role_manager;
-        });
-        Gate::define('user', function($user){
-            return $user->role === User::role_user;
-        });
+        Schema::defaultStringLength(191);
+        Paginator::defaultview('vendor.pagination.semantic-ui');
     }
 }
