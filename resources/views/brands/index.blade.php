@@ -5,8 +5,10 @@
 
 @section('monitor_contents')
 <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-        <a href="{{ route('brands.create') }}"> 新增廠牌資料</a>
-        <br/>
+@can('admin')
+            <a href="{{ route('brands.create') }}"> 新增廠牌資料</a>
+    @endcan       
+         <br/>
         <a href="{{ route('brands.over_fifty') }}">成立超過50年的廠牌資料</a>
         <form action="{{ url('brands/location') }}" method='POST'>
             {!! Form::label('loc','選取地區') !!}
@@ -23,8 +25,12 @@
                 <th>地區</th>
                 <th>成立時間</th>
                 <th>操作1</th>
-                <th>操作2</th>
-                <th>操作3</th>
+                @can('admin')
+                    <th>操作2</th>
+                    <th>操作3</th>
+                @elsecan('manager')
+                    <th>操作2</th>
+                @endcan
             </tr>
             @foreach($brands as $brand)
                 <tr>
@@ -33,14 +39,18 @@
                     <td>{{ $brand->location }}</td>
                     <td>{{ $brand->brand_time }}</td>
                     <td><a href="{{ route('brands.show',['id'=>$brand->id ]) }}">顯示</a></td>
-                    <td><a href="{{ route('brands.edit',['id'=>$brand->id ]) }}">修改</a></td>
-                    <td>                   
-                     <form action="{{url('/brands/delete',['id'=>$brand->id])}}"method="post">
-                        <input class="btn btn-default" type="submit" value="刪除"/>
-                        @method('delete')
-                        @csrf
-                        </form>
-                    </td>
+                    @can('admin')
+                        <td><a href="{{ route('brands.edit',['id'=>$brand->id ]) }}">編輯</a></td>
+                        <td>
+                            <form action="{{ url('/brands/delete', ['id'=>$brand->id]) }}" method='post'>
+                                <input class="btn btn-default" type="submit" value="刪除"/>
+                                @method('delete')
+                                @csrf
+                            </form>
+                        </td>
+                    @elsecan('manager')
+                        <td><a href="{{ route('brands.edit',['id'=>$brand->id ]) }}">編輯</a></td>
+                    @endcan
 
 
                 </tr>

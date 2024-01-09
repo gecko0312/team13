@@ -6,8 +6,10 @@
         <h1>顯示所有電腦螢幕資訊</h1>
         <table width=100% class="monitor_table">
         <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-        <a href="{{  route('monitors.create') }} ">新增螢幕</a>
-</br>
+        @can('admin')
+        <a href="{{ route('monitors.create') }}"> 新增螢幕資料</a>
+        @endcan
+    </br>
         <a href="{{ route('monitors.have_speaker') }}"> 有喇叭的螢幕資料</a>
         <form action="{{ url('monitors/panel') }}" method='GET'>
         {!! Form::label('pan', '選取面板：') !!}
@@ -28,8 +30,12 @@
                 <th>解析度</th>
                 <th>價錢</th>
                 <th>操作1</th>
-                <th>操作2</th>
-                <th>操作3</th>
+                @can('admin')
+                    <th>操作2</th>
+                    <th>操作3</th>
+                @elsecan('manager')
+                    <th>操作2</th>
+                @endcan
             </tr>
             @foreach($monitors as $monitor)          
                   <tr>
@@ -44,16 +50,19 @@
                     <td>{{ $monitor->resolution }}</td>
                     <td>{{ $monitor->price }}</td>
                     <td><a href="{{ route('monitors.show',['id'=>$monitor->id ]) }}">顯示</a></td>
-                    <td><a href="{{ route('monitors.edit',['id'=>$monitor->id ]) }}">編輯</a></td>
-                    <td>
-                    <form action="{{url('/monitors/delete',['id'=>$monitor->id])}}"method="post">
-                        <input class="btn btn-default" type="submit" value="刪除"/>
-                        @method('delete')
-                        @csrf
-                        </form>
-                    </td>
+                    @can('admin')
+                        <td><a href="{{ route('monitors.edit',['id'=>$monitor->id ]) }}">編輯</a></td>
+                        <td>
+                            <form action="{{ url('/monitors/delete',['id'=>$monitor->id]) }}" method="post">
+                                <input class="btn btn-default" type="submit" value="刪除"/>
+                                @method('delete')
+                                @csrf
+                            </form>
+                        </td>
+                    @elsecan('manager')
+                        <td><a href="{{ route('monitors.edit',['id'=>$monitor->id ]) }}">編輯</a></td>
+                    @endcan                  
                   
-                    <td>
                  
                 </div>
                 </tr>

@@ -90,6 +90,7 @@ class BrandsController extends Controller
      */
     public function edit($id)
     {
+        parent::edit($id);
         $brands=Brand::findOrFail($id);
         return view('brands.edit')->with('brands',$brands);
         //
