@@ -4,7 +4,10 @@
 
 @section('monitor_contents')
     <h1>新增螢幕資料</h1>
+    @include('message.list')
     {!! Form::open(['url'=>'monitors/store']) !!}
         @include('monitors.form',['submitButtonText'=>"新增螢幕資料"])
     {!! Form::close() !!}
 @endsection
+
+

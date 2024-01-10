@@ -9,3 +9,5 @@
         @include('brands.form',['submitButtonText'=>"新增廠牌資料"])
     {!! Form::close() !!}
 @endsection
+
+

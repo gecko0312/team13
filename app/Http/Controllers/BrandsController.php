@@ -95,6 +95,8 @@ class BrandsController extends Controller
      */
     public function edit($id)
     {
+        parent::edit($id);
+        
         $brand= Brand::findOrfail($id);
         return view('brands.edit',['brand'=>$brand]);
 
